@@ -1,9 +1,9 @@
 //TODO: Put all these in a for_each loop with some config objects
-resource null_resource "possums_collection_dev" {
-    triggers = {
-        build_number = "${timestamp()}"
-    }
-  
+resource "null_resource" "possums_collection_dev" {
+  triggers = {
+    build_number = "${timestamp()}"
+  }
+
   provisioner "local-exec" {
     command = <<-EOT
     mongosh "${mongodbatlas_cluster.atlas-cluster.connection_strings[0].standard_srv}" \
@@ -15,11 +15,11 @@ resource null_resource "possums_collection_dev" {
   depends_on = [mongodbatlas_cluster.atlas-cluster, mongodbatlas_database_user.db-user, mongodbatlas_project_ip_whitelist.project-whitelist-myip]
 }
 
-resource null_resource "numbats_collection_dev" {
-    triggers = {
-        build_number = "${timestamp()}"
-    }
-  
+resource "null_resource" "numbats_collection_dev" {
+  triggers = {
+    build_number = "${timestamp()}"
+  }
+
   provisioner "local-exec" {
     command = <<-EOT
     mongosh "${mongodbatlas_cluster.atlas-cluster.connection_strings[0].standard_srv}" \
@@ -31,11 +31,11 @@ resource null_resource "numbats_collection_dev" {
   depends_on = [mongodbatlas_cluster.atlas-cluster, mongodbatlas_database_user.db-user, mongodbatlas_project_ip_whitelist.project-whitelist-myip]
 }
 
-resource null_resource "numbats_collection_prod" {
-    triggers = {
-        build_number = "${timestamp()}"
-    }
-  
+resource "null_resource" "numbats_collection_prod" {
+  triggers = {
+    build_number = "${timestamp()}"
+  }
+
   provisioner "local-exec" {
     command = <<-EOT
     mongosh "${mongodbatlas_cluster.atlas-cluster.connection_strings[0].standard_srv}" \
@@ -47,11 +47,11 @@ resource null_resource "numbats_collection_prod" {
   depends_on = [mongodbatlas_cluster.atlas-cluster, mongodbatlas_database_user.db-user, mongodbatlas_project_ip_whitelist.project-whitelist-myip]
 }
 
-resource null_resource "possums_collection_prod" {
-    triggers = {
-        build_number = "${timestamp()}"
-    }
-  
+resource "null_resource" "possums_collection_prod" {
+  triggers = {
+    build_number = "${timestamp()}"
+  }
+
   provisioner "local-exec" {
     command = <<-EOT
     mongosh "${mongodbatlas_cluster.atlas-cluster.connection_strings[0].standard_srv}" \

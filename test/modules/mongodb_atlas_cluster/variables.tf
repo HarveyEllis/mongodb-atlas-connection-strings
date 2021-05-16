@@ -10,7 +10,7 @@ variable "atlas_project_name" {
 }
 
 variable "cluster_name" {
-  type = string
+  type        = string
   description = "The name to create the cluster with"
 }
 
@@ -35,8 +35,8 @@ variable "atlas_region" {
 }
 
 variable "whitelist_current_ip" {
-  type = bool
+  type        = bool
   description = "Whether to whitelist the ip address of this machine or not"
-  default = true
+  default     = true
 }
 

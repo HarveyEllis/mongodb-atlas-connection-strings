@@ -4,8 +4,8 @@ terraform {
 
   required_providers {
     mongodbatlas = {
-       source = "registry.terraform.io/mongodb/mongodbatlas"
-       version = ">= 0.9.0"
+      source  = "registry.terraform.io/mongodb/mongodbatlas"
+      version = ">= 0.9.0"
     }
   }
 }
