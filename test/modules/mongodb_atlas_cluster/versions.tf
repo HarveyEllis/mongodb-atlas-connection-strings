@@ -1,4 +1,4 @@
-# Define Terraform provider
+# Define Terraform provider and required provider versions
 terraform {
   required_version = ">= 0.14"
 

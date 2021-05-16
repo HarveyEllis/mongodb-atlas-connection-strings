@@ -52,10 +52,3 @@ resource "mongodbatlas_database_user" "db-user" {
   }
 }
 
-locals {
-  temp_pw = "d07Wrf1N6LDdLI_8"
-}
-
-output "connection_strings" {
-  value = mongodbatlas_cluster.atlas-cluster.connection_strings[0].standard_srv
-}

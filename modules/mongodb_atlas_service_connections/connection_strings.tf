@@ -12,8 +12,6 @@ data mongodbatlas_cluster project_clusters_details {
 }
 
 locals {
-  
-  
   service_config_as_map = {
     for svc in var.service_configuration : "${svc.serviceName}_${svc.mongoCluster}_${svc.mongoDatabase}" => svc
   }
@@ -37,19 +35,4 @@ locals {
         }
     }
   }
-
-  #   # transform the service config into something that is easier to work with
-  # temp_transformation = flatten([
-  #   for svc in var.service_configuration :  [
-  #     for col in svc.mongoCollection : {
-  #       serviceName = svc.serviceName
-  #       mongoCluster = svc.mongoCluster
-  #       mongoDatabase = svc.mongoDatabase
-  #       mongoCollection = col
-  #     }
-  #   ]
-  # ])
-  # all_service_connection_combinations = {
-  #   for svc in local.temp_transformation : "${svc.serviceName}_${svc.mongoCluster}_${svc.mongoDatabase}_${svc.mongoCollection}" => svc
-  # }
 }

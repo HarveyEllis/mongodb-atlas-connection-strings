@@ -2,8 +2,8 @@ resource "random_password" "service-password" {
   for_each = local.service_config_as_map
   
   length = 16
-  special = true
-  override_special = "_%@"
+  special = false
+  # override_special = "!*-_=+{}<>"
 }
 
 resource mongodbatlas_database_user store-service-user {
