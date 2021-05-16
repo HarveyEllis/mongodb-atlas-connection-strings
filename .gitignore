@@ -3,4 +3,3 @@
 *.tfplan
 *.tfstate.*
 *.tfstate
-private.tfvars
