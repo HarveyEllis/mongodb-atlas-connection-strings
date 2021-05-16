@@ -5,5 +5,10 @@ variable "project_id" {
 }
 
 variable "service_configuration" {
-    type = any
+    type = list(object({
+      serviceName = string
+      mongoCluster    = string
+      mongoDatabase   = string
+      mongoCollection = list(string)
+    }))
 }
