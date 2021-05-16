@@ -15,7 +15,7 @@ To run the code in this repo you require:
 - a valid mongodb atlas organisation, the ability to create clusters, and access to an api key
 
 ## Running the code and tests
-Setup the variables that are relevant to you in `private.tfvars`. These include the api keys for mongodb atlas. 
+Setup the variables that are relevant to you in `private.tfvars`. These include the api keys for mongodb atlas, and the org id (for creating a new project for the cluster). The values must be added in both `./test/modules/mongodb_atlas_cluster/private.tfvars` and `./test/private.tfvars`. 
 
 Then run: 
 ```
