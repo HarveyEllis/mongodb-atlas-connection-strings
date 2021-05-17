@@ -17,8 +17,6 @@ import (
 )
 
 func TestConnectionStrings(t *testing.T) {
-	// Construct the terraform options with default retryable errors to handle the most common
-	// retryable errors in terraform testing.
 
 	base_connection_string, project_id := CreateMongoDbCluster(t)
 	fmt.Println("base connection string: ", base_connection_string)
@@ -31,6 +29,8 @@ func TestConnectionStrings(t *testing.T) {
 		log.Println(err)
 	}
 
+	// Construct the terraform options with default retryable errors to handle the most common
+	// retryable errors in terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// Set the path to the Terraform code that will be tested.
 		TerraformDir: "../modules/mongodb_atlas_service_connections",
@@ -62,11 +62,12 @@ func TestConnectionStrings(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
+	// Bug here: Not quite able to get this to work - needs some other parameters to catch the error
 	// The passwords are not immediately available after creating the accounts - we must wait and retry
 	retry.DoWithRetryableErrors(t, "Attempting to connect to database using connection string",
-		map[string]string{"connection": "unable to authenticate"}, 10, retryTime, AttemptToUseConnectionStrings)
+		map[string]string{"connection": "unable", "connect": "auth"}, 10, retryTime, AttemptToUseConnectionStrings)
 
-	// comment out to delete after running! (useful when testing)
+	// comment out to not delete after running! (useful when testing/trying different things)
 	// Clean up resources with "terraform destroy" at the end of the test.
 	terraform.Destroy(t, terraformOptions)
 

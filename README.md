@@ -24,6 +24,11 @@ go get ./...
 go test -v -timeout 30m
 ```
 
+### Small bug with retries of the connection string
+Sometimes the code doesn't run fully to completion. This is because there is a lag between the time the database users are created and then become available to be used. This means that on the odd occassion the tests will try and use the connection strings before they are ready and thus will fail. I have tried to remediate this by using `DoWithRetryableErrors` from the `terratest/retry` module, but something is not quite right with that funciton call.
+
+Whilst obviously not ideal, rerunning the `go test` command will usually make the test pass a second time (it will start off from where it left of vis-a-vis terraform plans and applies)
+
 ## Testing
 This was a chance for me to try [terratest](https://terratest.gruntwork.io/) (so I did!)
 
@@ -51,3 +56,7 @@ This discussion becomes especially apt with kubernetes and if you are going to u
 
 ## Potential improvements
 In terms of testing the module could be improved by using a cloud provider secrets and stateful backend. This way the step of introspecting the statefile could be removed and replaced with something more secure.
+
+At the current time, the collections and databases that get created in cluster creation are hard coded - this is obviously not ideal from a testing perspective, and we should be able to pass the names of those in, or use the go mongo db driver to create them rather than the terraform local provisioner. 
+
+Finally, there is the small bug mentioned above - this could do with a bit more investigation, but I didn't have time. 
