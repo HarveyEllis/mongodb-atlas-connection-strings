@@ -25,13 +25,13 @@ go test -v -timeout 30m
 ```
 
 ## Testing
-This was a chance for me to try terratest (so I did!)
+This was a chance for me to try [terratest](https://terratest.gruntwork.io/) (so I did!)
 
-The testing of the project basically:
+The testing of the project basically does the following:
 - spins up a mongodb cluster
 - uses a database admin account to login and create some databases and collections
-- run the connection string module
-- try to connect using the connection strings
+- runs the connection string module
+- tries to connect using the connection strings
 
 The way that the testing is done is somewhat "dodgy", but in the circumstances (using and testing secrets) I think it is good enough. Essentially, we are using the fact that if you declare an output it gets stored in the statefile. Statefiles are also subject to change, so this method of testing might turn out to be brittle. 
 
